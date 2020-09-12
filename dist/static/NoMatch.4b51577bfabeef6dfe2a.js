@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{278:function(n,i,o){"use strict";o.r(i);var e=o(6),a=o.n(e),s=(o(0),o(50)),t=o(80),u=a()(t.a,{},void 0,a()(s.a,{name:"minus circle",size:"big"}),a()("strong",{},void 0,"Page not found!"));i.default=function(){return u}}}]);
+//# sourceMappingURL=NoMatch.4b51577bfabeef6dfe2a.js.map

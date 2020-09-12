@@ -1,0 +1,11 @@
+.test2 {
+  background: palegreen;
+  
+  &__hello {
+    color: red;
+    
+    &--active {
+      color: blue;
+    }
+  }
+}
