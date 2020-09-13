@@ -27,4 +27,8 @@ const generateScopedName = (localName, componentPath) => {
   return uniqueIdGenerator(reactComponentName) + '_' + uniqueIdGenerator(localName);
 };
 
-module.exports = { generateScopedName}
+const generateGlobalName = (localName) => {
+  return uniqueIdGenerator(localName);
+};
+
+module.exports = { generateScopedName, generateGlobalName}

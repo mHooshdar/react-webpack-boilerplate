@@ -39,11 +39,11 @@ module.exports = {
       filename: 'styles/[contenthash].css',
       chunkFilename: 'styles/[contenthash].chunk.css',
     }),
-    new WorkboxPlugin.GenerateSW({
-      swDest: 'service-worker.js',
-      clientsClaim: true,
-      skipWaiting: true,
-    }),
+    // new WorkboxPlugin.GenerateSW({
+    //   swDest: 'service-worker.js',
+    //   clientsClaim: true,
+    //   skipWaiting: true,
+    // }),
     // comment the devtool if you want to uncomment this section
     // new webpack.SourceMapDevToolPlugin({
     //   // server url

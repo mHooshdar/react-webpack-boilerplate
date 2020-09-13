@@ -14,9 +14,12 @@ const Home = () => {
   return (
     <Layout>
       {items.map(item => <div key={item} onClick={folan(item)}>asdasd</div>)}
-      <p>Hello World of React and Webpack asdasd!</p>
+      <p>Hello World of React and Webpack!</p>
       <p>
         <Link to="/dynamic">a to Dynamic Page</Link>
+      </p>
+      <p>
+        <Link to="/dynamic2">a to Dynamic Page</Link>
       </p>
     </Layout>
   );

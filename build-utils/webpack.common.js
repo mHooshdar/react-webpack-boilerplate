@@ -1,8 +1,11 @@
-const commonPaths = require('./common-paths');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { generateScopedName } = require('./incstr-prod');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+
+const commonPaths = require('./common-paths');
+const { generateScopedName, generateGlobalName } = require('./incstr-prod');
 
 // style files regexes
 const cssRegex = /\.css$/;
@@ -48,14 +51,30 @@ const getStyleLoaders = (env, cssOptions, preProcessor) => {
 
 const moduleObject = (env) => {
   let partialObject = {
-    localIdentName: '[name]__[local]__[hash:base64:5]',      
-    exportLocalsConvention: 'camelCaseOnly',
+    localIdentName: '[local]__[name]__[hash:base64:5]',      
+    // exportLocalsConvention: 'camelCase',
   }
   if (env.env === 'prod') {
     partialObject = {
       ...partialObject,
       getLocalIdent: (context, _localIdentName, localName, _options) => {
-        return generateScopedName(localName, context.resourcePath);
+        return generateScopedName(localName, context.resourcePath)
+      },
+    }
+  }
+  return partialObject
+}
+
+const pureModuleObject = (env) => {
+  let partialObject = {
+    localIdentName: '[local]',      
+    // exportLocalsConvention: 'camelCase',
+  }
+  if (env.env === 'prod') {
+    partialObject = {
+      ...partialObject,
+      getLocalIdent: (_context, _localIdentName, localName, _options) => {
+        return generateGlobalName(localName)
       },
     }
   }
@@ -85,6 +104,7 @@ module.exports = (env) => ({
             cacheDirectory: true,
             cacheCompression: false,
             envName: env.env,
+            plugins: ['lodash']
           },
         },
       },
@@ -93,6 +113,10 @@ module.exports = (env) => ({
         exclude: cssModuleRegex,
         use: getStyleLoaders(env, {
           importLoaders: 1,
+          modules: {
+            mode: 'pure',
+            ...pureModuleObject(env),
+          }
         }),
         sideEffects: true,
       },
@@ -109,6 +133,10 @@ module.exports = (env) => ({
         use: getStyleLoaders(
           env, {
             importLoaders: 2,
+            modules: {
+              mode: 'pure',
+              ...pureModuleObject(env),
+            }
           },
           'sass-loader'
         ),
@@ -181,6 +209,7 @@ module.exports = (env) => ({
     runtimeChunk: 'single',
   },
   plugins: [
+    new LodashModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
@@ -188,5 +217,6 @@ module.exports = (env) => ({
     new ForkTsCheckerWebpackPlugin({
       async: false,
     }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
 });

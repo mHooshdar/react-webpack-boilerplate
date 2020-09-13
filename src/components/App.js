@@ -6,11 +6,17 @@ import Home from './Home';
 import Loading from './Loading';
 
 const AsyncDynamicPAge = importedComponent(
-  () => import(/* webpackChunkName:'DynamicPage' */ './DynamicPage'),
+  () => import('./DynamicPage'),
   { LoadingComponent: Loading },
 );
+
+const AsyncDynamicPAge2 = importedComponent(
+  () => import('./DynamicPage2'),
+  { LoadingComponent: Loading },
+);
+
 const AsyncNoMatch = importedComponent(
-  () => import(/* webpackChunkName:'NoMatch' */ './NoMatch'),
+  () => import('./NoMatch'),
   { LoadingComponent: Loading },
 );
 
@@ -21,6 +27,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/dynamic" component={AsyncDynamicPAge} />
+          <Route exact path="/dynamic2" component={AsyncDynamicPAge2} />
           <Route component={AsyncNoMatch} />
         </Switch>
       </div>
