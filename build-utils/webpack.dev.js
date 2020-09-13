@@ -4,7 +4,7 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 module.exports = {
   mode: 'development',
   output: {
-    filename: '[name].[hash].js',
+    filename: '[hash].js',
   },
   resolve: {
     alias: {

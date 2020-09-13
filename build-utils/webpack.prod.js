@@ -7,8 +7,9 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 module.exports = {
   mode: 'production',
   output: {
-    filename: 'static/[name].[contenthash].js',
+    filename: 'static/[contenthash].js',
   },
+  // comment this line if you want to use
   devtool: 'source-map',
   optimization: {
     minimize: true,
@@ -35,13 +36,19 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].[contenthash].css',
-      chunkFilename: 'styles/[name].[contenthash].chunk.css',
+      filename: 'styles/[contenthash].css',
+      chunkFilename: 'styles/[contenthash].chunk.css',
     }),
     new WorkboxPlugin.GenerateSW({
       swDest: 'service-worker.js',
       clientsClaim: true,
       skipWaiting: true,
     }),
+    // comment the devtool if you want to uncomment this section
+    // new webpack.SourceMapDevToolPlugin({
+    //   // server url
+    //   publicPath: 'https://localhost:5050/',
+    //   filename: '[file].map',
+    // }),
   ],
 };

@@ -132,7 +132,7 @@ module.exports = (env) => ({
         test: /\.(eot|otf|ttf|woff|woff2)$/,
         loader: 'file-loader',
         options: {
-          name: 'static/media/[name].[contenthash].[ext]',
+          name: 'static/media/[contenthash].[ext]',
         },
       },
       {
@@ -141,7 +141,7 @@ module.exports = (env) => ({
           loader: 'url-loader',
           options: {
             limit: 8192,
-            name: 'static/media/[name].[contenthash].[ext]',
+            name: 'static/media/[contenthash].[ext]',
           },
         },
       },
@@ -165,12 +165,12 @@ module.exports = (env) => ({
         },
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name(module, _chunks, cacheGroupKey) {
-            const packageName = module.context.match(
-              /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-            )[1];
-            return `node_modules/${cacheGroupKey}.${packageName.replace('@', '')}`;
-          },
+          // name(module, _chunks, cacheGroupKey) {
+          //   const packageName = module.context.match(
+          //     /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+          //   )[1];
+          //   return `node_modules/${cacheGroupKey}.${packageName.replace('@', '')}`;
+          // },
         },
         common: {
           minChunks: 2,
