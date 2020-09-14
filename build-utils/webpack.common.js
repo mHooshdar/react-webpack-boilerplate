@@ -51,35 +51,33 @@ const getStyleLoaders = (env, cssOptions, preProcessor) => {
 
 const moduleObject = (env) => {
   let partialObject = {
-    localIdentName: '[local]__[name]__[hash:base64:5]',      
+    localIdentName: '[local]__[name]__[hash:base64:5]',
     // exportLocalsConvention: 'camelCase',
-  }
+  };
   if (env.env === 'prod') {
     partialObject = {
       ...partialObject,
-      getLocalIdent: (context, _localIdentName, localName, _options) => {
-        return generateScopedName(localName, context.resourcePath)
-      },
-    }
+      getLocalIdent: (context, _localIdentName, localName, _options) =>
+        generateScopedName(localName, context.resourcePath),
+    };
   }
-  return partialObject
-}
+  return partialObject;
+};
 
 const pureModuleObject = (env) => {
   let partialObject = {
-    localIdentName: '[local]',      
+    localIdentName: '[local]',
     // exportLocalsConvention: 'camelCase',
-  }
+  };
   if (env.env === 'prod') {
     partialObject = {
       ...partialObject,
-      getLocalIdent: (_context, _localIdentName, localName, _options) => {
-        return generateGlobalName(localName)
-      },
-    }
+      getLocalIdent: (_context, _localIdentName, localName, _options) =>
+        generateGlobalName(localName),
+    };
   }
-  return partialObject
-}
+  return partialObject;
+};
 
 module.exports = (env) => ({
   entry: {
@@ -104,7 +102,7 @@ module.exports = (env) => ({
             cacheDirectory: true,
             cacheCompression: false,
             envName: env.env,
-            plugins: ['lodash']
+            plugins: ['lodash'],
           },
         },
       },
@@ -116,7 +114,7 @@ module.exports = (env) => ({
           modules: {
             mode: 'pure',
             ...pureModuleObject(env),
-          }
+          },
         }),
         sideEffects: true,
       },
@@ -131,21 +129,23 @@ module.exports = (env) => ({
         test: sassRegex,
         exclude: sassModuleRegex,
         use: getStyleLoaders(
-          env, {
+          env,
+          {
             importLoaders: 2,
             modules: {
               mode: 'pure',
               ...pureModuleObject(env),
-            }
+            },
           },
-          'sass-loader'
+          'sass-loader',
         ),
         sideEffects: true,
       },
       {
         test: sassModuleRegex,
         use: getStyleLoaders(
-          env, {
+          env,
+          {
             modules: moduleObject(env),
             importLoaders: 2,
           },

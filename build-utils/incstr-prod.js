@@ -20,15 +20,14 @@ const createUniqueIdGenerator = () => {
   };
 };
 
-const uniqueIdGenerator = createUniqueIdGenerator();
+const uniqueModuleIdGenerator = createUniqueIdGenerator();
+const uniqueGlobalIdGenerator = createUniqueIdGenerator();
 
 const generateScopedName = (localName, componentPath) => {
   const reactComponentName = componentPath.split('/').slice(-1)
-  return uniqueIdGenerator(reactComponentName) + '_' + uniqueIdGenerator(localName);
+  return uniqueModuleIdGenerator(reactComponentName) + '_' + uniqueModuleIdGenerator(localName);
 };
 
-const generateGlobalName = (localName) => {
-  return uniqueIdGenerator(localName);
-};
+const generateGlobalName = (localName) => uniqueGlobalIdGenerator(localName);
 
 module.exports = { generateScopedName, generateGlobalName}

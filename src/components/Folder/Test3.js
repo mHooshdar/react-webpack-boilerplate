@@ -1,10 +1,9 @@
 import React from 'react'
-import classNames from 'classnames/bind';
+import classNames from '../../globalClassess';
 
-import styles from '../../global.scss';
-import stylesPure from '../dynamic-page.scss';
+import styles from '../dynamic-page.scss';
 
-const cx = classNames.bind({...styles, ...stylesPure});
+const cx = classNames.bind(styles);
 
 const Test3 = () => {
   return (

@@ -1,20 +1,22 @@
 import React from 'react';
+import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { Header, Container, Divider, Icon } from 'semantic-ui-react';
 
-import { pullRight, h1 } from './layout.css';
+import styles from './layout.css';
+const cx = classNames.bind(styles);
 
 const Layout = ({ children }) => {
   return (
     <Container>
       <Link to="/">
-        <Header as="h1" className={h1}>
+        <Header as="h1" className={cx('h1')}>
           webpack-for-react
         </Header>
       </Link>
       {children}
       <Divider />
-      <p className={pullRight}>
+      <p className={cx('pull-right')}>
         Made with <Icon name="heart" color="red" /> by Esau Silva
       </p>
     </Container>

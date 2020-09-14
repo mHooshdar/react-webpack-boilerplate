@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from 'semantic-ui-react';
-import classNames from 'classnames/bind';
+import classNames from '../globalClassess';
 
 import stylesPure from './dynamic-page.scss';
 import styles from './dynamic-page.module.scss';
@@ -19,14 +19,14 @@ const DynamicPage = () => {
       <Header as="h2">Dynamic Page</Header>
       <p className={cx('dp')}>This page was loaded aaaa!!!</p>
       <p className={cx('dp-module')}>asdasdasd</p>
-      <p className={cx('dpModuleTest')}>asdasdasd</p>
+      <p className={cx('dp-module-test')}>asdasdasd</p>
       <p className={cx('test')}>asdasdasd</p>
-      <p className={cx('b-red')}>asdasdasd</p>
+      <p className={cx('b-red', 'flex')}>asdasdasd</p>
       <Test />
       <Test2 />
       <Test2 />
       <Test2 />
-      {/* <Test3 /> */}
+      <Test3 />
     </Layout>
   );
 };
