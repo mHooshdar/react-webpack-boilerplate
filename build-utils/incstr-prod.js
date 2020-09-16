@@ -20,12 +20,13 @@ const createUniqueIdGenerator = () => {
   };
 };
 
+const uniqueModuleFileIdGenerator = createUniqueIdGenerator();
 const uniqueModuleIdGenerator = createUniqueIdGenerator();
 const uniqueGlobalIdGenerator = createUniqueIdGenerator();
 
 const generateScopedName = (localName, componentPath) => {
-  const reactComponentName = componentPath.split('/').slice(-1)
-  return uniqueModuleIdGenerator(reactComponentName) + '_' + uniqueModuleIdGenerator(localName);
+  // const reactComponentName = componentPath.split('/').slice(-1)
+  return uniqueModuleFileIdGenerator(componentPath) + '_' + uniqueModuleIdGenerator(localName);
 };
 
 const generateGlobalName = (localName) => uniqueGlobalIdGenerator(localName);

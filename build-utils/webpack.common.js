@@ -185,12 +185,12 @@ module.exports = (env) => ({
       maxInitialRequests: 20,
       maxAsyncRequests: 20,
       cacheGroups: {
-        styles: {
-          name: 'styles',
-          test: styleRegex,
-          chunks: 'all',
-          enforce: true,
-        },
+        // styles: {
+        //   name: 'styles',
+        //   test: styleRegex,
+        //   chunks: 'all',
+        //   enforce: true,
+        // },
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           // name(module, _chunks, cacheGroupKey) {
